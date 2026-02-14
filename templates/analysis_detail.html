@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+
+    <h2>📈 Analysis Detail</h2>
+
+    <!-- KPI -->
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <p class="kpi-title">Loan Amount</p>
+            <p class="kpi-value">₹ {{ record.loan_amount }}</p>
+        </div>
+
+        <div class="kpi-card">
+            <p class="kpi-title">Risk Level</p>
+            <p class="kpi-value">{{ record.risk }}</p>
+        </div>
+
+        <div class="kpi-card">
+            <p class="kpi-title">Failure Probability</p>
+            <p class="kpi-value">{{ record.probability }}%</p>
+        </div>
+    </div>
+
+    <!-- Scenario -->
+    <h3>Scenario Used</h3>
+    <ul>
+        <li>Delay: {{ record.delay }} months</li>
+        <li>Cost Inflation: {{ record.inflation }}%</li>
+        <li>Revenue Drop: {{ record.revenue_drop }}%</li>
+    </ul>
+
+    <!-- Chart -->
+    <h3>Cash Flow Trend</h3>
+    <canvas id="cashflowChart"></canvas>
+</div>
+
+<script id="cashflow-data" type="application/json">
+{{ cashflow | tojson }}
+</script>
+
+{% endblock %}

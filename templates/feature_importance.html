@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<a href="/dashboard" class="btn">← Back to Dashboard</a>
+
+<div class="container">
+    <h2>🧠 AI Feature Importance</h2>
+    <p style="color:#9ca3af;">
+        Shows relative influence of financial variables on predicted failure probability.
+    </p>
+
+    <canvas id="importanceChart"></canvas>
+</div>
+
+<script id="importance-data" type="application/json">
+{{ result | tojson }}
+</script>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<a href="/dashboard" class="btn">← Back to Dashboard</a>
+
+<div class="container">
+    <h2>🧪 Sensitivity Analysis</h2>
+    <p style="color:#9ca3af;">
+        Shows how small changes in key variables impact failure probability.
+    </p>
+    <!-- Results Summary -->
+<ul style="margin:20px 0; color:#e5e7eb;">
+    {% for name, data in result.items() %}
+        <li>
+            <strong>{{ name }}</strong> :
+            Failure Probability = {{ data.probability }}%
+        </li>
+    {% endfor %}
+</ul>
+
+
+    <canvas id="sensitivityChart"></canvas>
+</div>
+
+<script id="sensitivity-data" type="application/json">
+{{ result | tojson }}
+</script>
+
+{% endblock %}

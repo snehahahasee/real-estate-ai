@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<a href="/dashboard" class="btn">← Back to Dashboard</a>
+
+<div class="container">
+    <h2>📊 Scenario Comparison</h2>
+    <p style="color:#9ca3af;">
+        Comparison of project risk under different financial conditions.
+    </p>
+
+    <!-- Summary Cards -->
+    <div class="kpi-grid">
+        {% for name, data in result.items() %}
+        <div class="kpi-card">
+            <p class="kpi-title">{{ name }}</p>
+            <p class="kpi-value">{{ data.probability }}%</p>
+            <p style="color:#9ca3af;">Risk: {{ data.risk }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3 style="margin-top:40px;">Failure Probability Comparison</h3>
+    <canvas id="scenarioChart"></canvas>
+</div>
+
+<script id="scenario-data" type="application/json">
+{{ result | tojson }}
+</script>
+
+{% endblock %}

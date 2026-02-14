@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<a href="/dashboard" class="btn">← Back to Dashboard</a>
+
+<div class="container">
+    <h2>🎲 Monte Carlo Simulation</h2>
+    <p style="color:#9ca3af;">
+        Probability distribution of project failure under uncertainty.
+    </p>
+    <!-- Numerical Results -->
+
+
+
+    <canvas id="monteCarloChart"></canvas>
+<div style="margin-top:25px; color:#e5e7eb;">
+    <p><strong>Average Failure Probability:</strong> {{ result.average }}%</p>
+    <p><strong>Worst Case:</strong> {{ result.worst }}%</p>
+    <p><strong>Best Case:</strong> {{ result.best }}%</p>
+</div>
+    
+</div>
+
+<script id="monte-data" type="application/json">
+{{ result | tojson }}
+</script>
+
+{% endblock %}
+

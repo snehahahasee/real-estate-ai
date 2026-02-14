@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <h2>📊 My Analysis History</h2>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Loan Amount</th>
+            <th>Risk</th>
+            <th>Probability</th>
+            <th>Action</th>
+        </tr>
+
+        {% for r in records %}
+        <tr>
+            <td>{{ r.timestamp.strftime("%d %b %Y") }}</td>
+            <td>₹ {{ r.loan_amount }}</td>
+            <td>{{ r.risk }}</td>
+            <td>{{ r.probability }}%</td>
+            <td>
+                <a href="/history/view/{{ r.id }}" class="btn">View</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- HERO -->
+<div class="landing-container">
+    <div class="landing-text">
+        <h1>
+            AI-Driven <span>Real Estate Risk</span><br>
+            Intelligence Platform
+        </h1>
+
+        <p>
+            A corporate-grade decision intelligence system for
+            <strong>investors</strong> and <strong>property owners</strong>
+            to evaluate cash-flow risk, execution uncertainty,
+            and project failure probability using AI.
+        </p>
+
+        <div style="margin-top:35px;">
+            <a href="/register" class="btn">Create Account</a>
+            <span style="margin:0 12px;"></span>
+            <a href="/login" class="btn">Login</a>
+        </div>
+    </div>
+
+    <div class="landing-image">
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa"
+             alt="Real estate analytics">
+    </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-it-works">
+    <h2>How It Works</h2>
+
+    <div class="steps">
+        <div class="step-card">
+            <h3>1️⃣ Input Project Data</h3>
+            <p>
+                Users enter financial, operational, and scenario parameters
+                such as loan size, revenue, delays, and inflation.
+            </p>
+        </div>
+
+        <div class="step-card">
+            <h3>2️⃣ AI Risk Evaluation</h3>
+            <p>
+                Feature-engineered financial signals are analyzed using
+                machine-learning models to estimate failure probability.
+            </p>
+        </div>
+
+        <div class="step-card">
+            <h3>3️⃣ Visual Insights</h3>
+            <p>
+                Cash-flow trends, AI risk scores, and forecasts are
+                visualized for informed decision-making.
+            </p>
+        </div>
+
+        <div class="step-card">
+            <h3>4️⃣ Track History</h3>
+            <p>
+                Each user’s past analyses are securely stored and
+                accessible for comparison and review.
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

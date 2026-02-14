@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<a href="/dashboard" class="btn">← Back to Dashboard</a>
+
+<div class="container">
+    <h2>💡 Investment Recommendation</h2>
+
+    <!-- Gauge Chart -->
+    <div style="max-width:400px; margin:auto;">
+        <canvas id="recommendationChart"></canvas>
+    </div>
+
+    <!-- Decision Card -->
+    <div class="kpi-card" style="margin-top:40px; text-align:center;">
+        <p class="kpi-title">AI Decision</p>
+        <p class="kpi-value">{{ title }}</p>
+        <p style="color:#9ca3af;">{{ explanation }}</p>
+        <p style="margin-top:10px;">
+            <strong>Failure Probability:</strong> {{ probability }}%
+        </p>
+    </div>
+</div>
+
+<script id="recommendation-data" type="application/json">
+{{ {"probability": probability} | tojson }}
+</script>
+
+{% endblock %}
