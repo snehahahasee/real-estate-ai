@@ -230,3 +230,58 @@ if (importanceCanvas && importanceDataTag) {
         }
     });
 }
+// =====================
+// ADMIN DASHBOARD CHARTS
+// =====================
+const adminDataTag = document.getElementById("admin-data");
+
+if (adminDataTag) {
+    const data = JSON.parse(adminDataTag.textContent);
+
+    // Analyses Over Time
+    const timeCtx = document.getElementById("timeChart");
+    if (timeCtx) {
+        new Chart(timeCtx, {
+            type: "line",
+            data: {
+                labels: data.dates,
+                datasets: [{
+                    label: "Analyses",
+                    data: data.counts,
+                    borderColor: "rgba(59,130,246,0.9)",
+                    backgroundColor: "rgba(59,130,246,0.2)",
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                animation: { duration: 1500 },
+                plugins: { legend: { display: false } }
+            }
+        });
+    }
+
+    // Risk Distribution
+    const riskCtx = document.getElementById("riskChart");
+    if (riskCtx) {
+        new Chart(riskCtx, {
+            type: "pie",
+            data: {
+                labels: data.risk_labels,
+                datasets: [{
+                    data: data.risk_counts,
+                    backgroundColor: [
+                        "rgba(34,197,94,0.8)",
+                        "rgba(234,179,8,0.8)",
+                        "rgba(239,68,68,0.8)"
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                animation: { duration: 1500 }
+            }
+        });
+    }
+}

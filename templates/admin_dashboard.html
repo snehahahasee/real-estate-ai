@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<a href="/dashboard" class="btn">← Back</a>
+
+<div class="container">
+    <h2>☁️ Cloud Activity Dashboard</h2>
+
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <p class="kpi-title">Total Users</p>
+            <p class="kpi-value">{{ total_users }}</p>
+        </div>
+
+        <div class="kpi-card">
+            <p class="kpi-title">Total Analyses</p>
+            <p class="kpi-value">{{ total_analyses }}</p>
+        </div>
+
+        <div class="kpi-card">
+            <p class="kpi-title">Avg Failure Probability</p>
+            <p class="kpi-value">{{ avg_probability }}%</p>
+        </div>
+    </div>
+
+    <h3 style="margin-top:40px;">📈 Analyses Over Time</h3>
+    <canvas id="timeChart"></canvas>
+
+    <h3 style="margin-top:40px;">🧠 Risk Distribution</h3>
+    <canvas id="riskChart"></canvas>
+
+    <h3 style="margin-top:40px;">🕒 Recent Activity</h3>
+    <ul>
+        {% for record in latest %}
+            <li>
+                {{ record.timestamp }} |
+                Loan: {{ record.loan_amount }} |
+                Risk: {{ record.risk_level }} |
+                Probability: {{ record.probability }}%
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<script id="admin-data" type="application/json">
+{
+    "dates": {{ dates | tojson }},
+    "counts": {{ counts | tojson }},
+    "risk_labels": {{ risk_labels | tojson }},
+    "risk_counts": {{ risk_counts | tojson }}
+}
+</script>
+
+{% endblock %}

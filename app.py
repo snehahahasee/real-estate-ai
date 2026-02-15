@@ -196,5 +196,56 @@ def feature_importance():
     result = compute_feature_importance(record)
     return render_template("feature_importance.html", result=result)
 
+
+@app.route("/admin-dashboard")
+def admin_dashboard():
+    from models.database import User, Analysis
+    from sqlalchemy import func
+
+    total_users = User.query.count()
+    total_analyses = Analysis.query.count()
+
+    avg_probability = db.session.query(
+        func.avg(Analysis.probability)
+    ).scalar()
+
+    # Analyses over time
+    analyses_by_date = db.session.query(
+        func.date(Analysis.timestamp),
+        func.count(Analysis.id)
+    ).group_by(
+        func.date(Analysis.timestamp)
+    ).all()
+
+    dates = [str(row[0]) for row in analyses_by_date]
+    counts = [row[1] for row in analyses_by_date]
+
+    # Risk distribution
+    risk_distribution = db.session.query(
+        Analysis.risk_level,
+        func.count(Analysis.id)
+    ).group_by(
+        Analysis.risk_level
+    ).all()
+
+    risk_labels = [row[0] for row in risk_distribution]
+    risk_counts = [row[1] for row in risk_distribution]
+
+    latest = Analysis.query.order_by(
+        Analysis.timestamp.desc()
+    ).limit(5).all()
+
+    return render_template(
+        "admin_dashboard.html",
+        total_users=total_users,
+        total_analyses=total_analyses,
+        avg_probability=round(avg_probability or 0, 2),
+        latest=latest,
+        dates=dates,
+        counts=counts,
+        risk_labels=risk_labels,
+        risk_counts=risk_counts
+    )
+
 if __name__ == "__main__":
     app.run(debug=True)
