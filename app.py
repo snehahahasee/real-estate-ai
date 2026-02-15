@@ -222,11 +222,12 @@ def admin_dashboard():
 
     # Risk distribution
     risk_distribution = db.session.query(
-        Analysis.risk_level,
+        Analysis.risk,
         func.count(Analysis.id)
     ).group_by(
-        Analysis.risk_level
+        Analysis.risk
     ).all()
+
 
     risk_labels = [row[0] for row in risk_distribution]
     risk_counts = [row[1] for row in risk_distribution]
